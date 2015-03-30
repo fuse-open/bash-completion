@@ -14,7 +14,7 @@ build_options()
 
 suggest_project()
 {
-    projects=`ls *.unoproj`
+    projects=`ls *.unoproj 2>/dev/null`
     for p in $projects; do
         for w in "${COMP_WORDS[@]}"; do
             if [ "$p" == "$w" ]; then
