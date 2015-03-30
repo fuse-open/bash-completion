@@ -1,3 +1,7 @@
+# Copyright (c) 2015 Fuse
+# MIT License, see LICENSE.TXT
+# https://github.com/fusetools/UnoBashCompletion
+
 build_options()
 {
     options="--target= --set: --output-dir --main-class= --debug --no-debug --test --clean --run"
