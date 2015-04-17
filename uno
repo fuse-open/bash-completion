@@ -72,3 +72,23 @@ _uno()
     COMPREPLY=( $(compgen -W "${root_cmds}" -- ${cur}) )
 }
 complete -F _uno uno
+
+build_options()
+{
+    options="--target= --set: --output-dir --main-class= --debug --no-debug --test --clean --run"
+    additional_options="--no-native-build --native-build-args= --run-args= --test-server-url= --test-list-file="
+    compiler_options="--no-strip -O -W"
+    debugging_options="--print-internals"
+    opts="$projects $options $additional_options $compiler_options $debugging_options"
+    echo $opts
+}
+
+_unotest()
+{
+    local cur projects options
+    projects=`suggest_project`
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    options="$projects -h -? --help -r --reporter= -l --logfile= -t --target= -u --uno= --webgl-browser= -v --verbose -q --quiet -f --filter= -o --timeout= --startup-timeout= --trace --allow-debugger"
+    COMPREPLY=( $(compgen -W "${options}" -- ${cur}) )
+}
+complete -F _unotest unotest
