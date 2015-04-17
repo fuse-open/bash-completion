@@ -1,0 +1,4 @@
+INSTALL_TO=/usr/local/etc/bash_completion.d/uno
+
+rm -f $INSTALL_TO
+ln -s `pwd`"/uno" $INSTALL_TO
