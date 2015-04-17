@@ -2,7 +2,7 @@
 # MIT License, see LICENSE.TXT
 # https://github.com/fusetools/UnoBashCompletion
 
-build_options()
+_uno_build_options()
 {
     options="--target= --set: --output-dir --main-class= --debug --no-debug --test --clean --run"
     additional_options="--no-native-build --native-build-args= --run-args= --test-server-url= --test-list-file="
@@ -12,7 +12,7 @@ build_options()
     echo $opts
 }
 
-suggest_project()
+_uno_suggest_project()
 {
     projects=`ls -d *.unoproj */ 2>/dev/null`
     for p in $projects; do
@@ -32,11 +32,11 @@ _uno()
     cur="${COMP_WORDS[COMP_CWORD]}"
     command=${COMP_WORDS[1]}
     root_cmds="build clean create run browse update config --version --help"
-    projects=`suggest_project`
+    projects=`_uno_suggest_project`
 
     case "${command}" in
         build)
-            opts=`build_options`
+            opts=`_uno_build_options`
             COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
             return 0
         ;;
@@ -54,7 +54,7 @@ _uno()
             return 0
         ;;
         browse)
-            opts=`build_options`
+            opts=`_uno_build_options`
             COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
             return 0
         ;;
@@ -76,7 +76,7 @@ complete -F _uno uno
 _unotest()
 {
     local cur projects options
-    projects=`suggest_project`
+    projects=`_uno_suggest_project`
     cur="${COMP_WORDS[COMP_CWORD]}"
     options="$projects -h -? --help -r --reporter= -l --logfile= -t --target= -u --uno= --webgl-browser= -v --verbose -q --quiet -f --filter= -o --timeout= --startup-timeout= --trace --allow-debugger"
     COMPREPLY=( $(compgen -W "${options}" -- ${cur}) )
